@@ -30,7 +30,7 @@ find "$SRC_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \
     -fill "rgba(245,245,245,0.55)" \
     -stroke black -strokewidth 8 \
     -pointsize 420 \
-    -annotate 45 "LENTILLY GR  #$num" \
+    -annotate 45 "MON FILIGRANE ICI  #$num" \
     "$PREVIEW_DIR/$filename"
 
   echo "✔ PREVIEW $filename -> #$num"
