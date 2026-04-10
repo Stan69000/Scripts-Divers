@@ -1,0 +1,4 @@
+order,name,slackUserId,email,active
+1,Lead Sales 1,UBBBBBBB1,sales.lead.1@company.com,true
+2,Lead Sales 2,UBBBBBBB2,sales.lead.2@company.com,true
+3,Lead Sales 3,UBBBBBBB3,sales.lead.3@company.com,true

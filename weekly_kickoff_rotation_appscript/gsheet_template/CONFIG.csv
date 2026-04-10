@@ -1,0 +1,20 @@
+key,value,description
+DEBUG,false,Compatibilite legacy debug
+LOG_LEVEL,ERROR,Niveaux: ERROR|INFO|DEBUG
+TIMEZONE,Europe/Paris,Timezone du script
+SLACK_POST_CHANNEL_ID,,Optionnel si webhook deja lie au bon channel
+WEEKLY_ANNOUNCEMENT_CHANNEL_ID,C08976543,ID du channel de publication du compte-rendu
+LIEN_VISIO_WEEKLY,,Lien de visio weekly ajoute au message Slack
+WEEKLY_MEET_URL,,Lien du Google Meet du weekly
+WEEKLY_SLIDES_FOLDER_ID,,ID du dossier Drive contenant les Slides weekly
+LIEN_REMOTE,,Lien remote ajoute dans le message Slack
+JOUR_FERIES_FRANCAIS_API,https://calendrier.api.gouv.fr/jours-feries/metropole/{year}.json,API jours feries FR ({year} remplace par l annee)
+JOUR_OFF_INDY,,Dates a sauter format YYYY-MM-DD separees par virgule
+MANAGERS_SLACK_GROUP_IDS_SALES,,IDs groupes Slack Sales (ex S123ABC,S456DEF)
+MANAGERS_SLACK_GROUP_IDS_CARE,,IDs groupes Slack Care (ex S123ABC,S456DEF)
+MANAGERS_SLACK_USER_IDS,,Fallback legacy IDs users managers (optionnel)
+ROTATION_START_DATE,2026-01-05,Lundi d'ancrage pour alternance
+CARE_WEEK_OFFSET,0,0 si semaine care sur date d'ancrage sinon 1
+MONDAY_POST_HOUR,9,Heure de post lundi
+MONDAY_POST_MINUTE,5,Minute de post lundi
+ABSENCE_SOURCE,GSHEET,GSHEET ou LUCCA
