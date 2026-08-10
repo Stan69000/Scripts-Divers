@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  shell:
+    name: Shell script validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check Bash syntax
+        run: find Photographies -type f -name '*.sh' -print0 | xargs -0 -n1 bash -n
+
+      - name: Run ShellCheck
+        run: find Photographies -type f -name '*.sh' -print0 | xargs -0 shellcheck --severity=error
+
+  python:
+    name: Python validation and PDF smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: c5-envelope-generator
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: c5-envelope-generator/requirements.txt
+
+      - name: Install dependencies and audit tool
+        run: python -m pip install -r requirements.txt pip-audit
+
+      - name: Compile Python sources
+        run: python -m compileall -q src
+
+      - name: Audit Python dependencies
+        run: python -m pip_audit -r requirements.txt
+
+      - name: Generate sample PDFs
+        run: |
+          cp examples/example_input.csv input.csv
+          python src/generate_envelopes.py
+          test -s C5_ZONE_2.pdf
+          test -s C5_ZONE_3.pdf
+
